@@ -1,0 +1,39 @@
+{	  
+    "manifest_version": 2,
+    "name": "TestPasser",
+    "permissions": ["tabs"
+    ],
+	
+	"background": {
+    "scripts": ["background.js"],
+	 "persistent": true
+	},
+	
+    "description": "Choose random answer without you ",
+    "version": "1.0",
+    "browser_action": {      
+        "default_popup":"popup.html"
+    },
+
+	"content_scripts": [{
+      "matches": [ "https://dl.tntu.edu.ua/mods/_standard/tests/take_test.php?*"  ],
+      "js": ["contentscript.js", "SumbitTry.js"],
+      "run_at": "document_end"
+    },
+      {
+        "matches": [ "https://dl.tntu.edu.ua/mods/_standard/tests/test_intro.php?*"  ],
+        "js": ["start_new_test.js"],
+        "run_at": "document_end"
+      },
+      {
+        "matches": [ "https://dl.tntu.edu.ua/mods/_standard/tests/view_results.php?*"  ],
+        "js": ["send_result.js"],
+        "run_at": "document_end"
+      }
+	],
+
+	"icons": { "16": "calc.png",
+               "48": "calc.png",
+               "128": "calc.png" 
+			   }
+	}
